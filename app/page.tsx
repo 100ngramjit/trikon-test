@@ -38,11 +38,12 @@ export default function Home() {
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <div className="flex justify-between p-4">
+      <div className="flex m-2">
         {renderSection("to do")}
         {renderSection("doing")}
         {renderSection("done")}
       </div>
+
       <AddTaskModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}

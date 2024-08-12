@@ -27,14 +27,19 @@ const TaskSection: React.FC<TaskSectionProps> = ({
   drop(ref);
 
   return (
-    <div ref={ref} className="flex-1 bg-gray-100 p-4 rounded-lg shadow-md m-2">
+    <div
+      ref={ref}
+      className="flex flex-col w-1/3 h-full p-4 bg-gray-100 rounded-lg shadow-md mx-2"
+    >
       <h2 className="text-xl font-bold mb-4 text-gray-700">
         {status.charAt(0).toUpperCase() + status.slice(1)}
       </h2>
-      <div>
-        {tasks.map((task) => (
-          <TaskCard key={task.id} task={task} />
-        ))}
+      <div className="flex-grow overflow-y-auto">
+        <div className="space-y-2">
+          {tasks.map((task) => (
+            <TaskCard key={task.id} task={task} />
+          ))}
+        </div>
       </div>
       <button
         onClick={onAddCard}

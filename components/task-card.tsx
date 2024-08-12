@@ -34,7 +34,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
       <div
         ref={ref}
         className={`bg-white p-4 rounded-lg shadow-xl mb-3 ${
-          isDragging ? "opacity-50" : ""
+          isDragging ? "cursor-grabbing opacity-50" : "cursor-grab"
         }`}
       >
         <h3 className="text-lg text-gray-600 font-semibold mb-2">
