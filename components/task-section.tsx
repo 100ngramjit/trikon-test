@@ -38,7 +38,7 @@ const TaskSection: React.FC<TaskSectionProps> = ({
       </div>
       <button
         onClick={onAddCard}
-        className="mt-4 bg-none text-gray-400 font-bold py-2 px-2 rounded inline-flex items-center"
+        className="mt-4 bg-none text-gray-500 font-bold py-2 px-2 rounded inline-flex items-center"
       >
         <span>
           <Plus />

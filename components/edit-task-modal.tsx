@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Task } from "@/models/task";
 import { useAppDispatch } from "@/hooks/reduxHooks";
 import { editTask } from "@/store/taskSlice";
+import { CircleX } from "lucide-react";
 
 interface EditTaskModalProps {
   task: Task;
@@ -26,26 +27,29 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50">
-      <div className="bg-white p-6 rounded-lg shadow-lg">
-        <h2 className="text-xl font-semibold mb-4">Edit Task</h2>
-        <div className="mb-4">
-          <label className="block text-gray-700">Task Name</label>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="mt-1 p-2 w-full text-black border rounded"
-          />
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+      <div className="bg-white p-6 rounded-lg w-1/2">
+        <div className="flex justify-between space-x-2 text-black">
+          <h2 className="text-2xl font-bold mb-4 text-black">Edit Task</h2>
+          <button onClick={onClose}>
+            <CircleX />
+          </button>
         </div>
-        <div className="mb-4">
-          <label className="block text-gray-700">Description</label>
-          <textarea
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            className="mt-1 p-2 w-full text-black border rounded"
-          />
-        </div>
+
+        <label className="block text-gray-700">Task Name</label>
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="w-full p-2 mb-4 border border-gray-300 text-black rounded"
+        />
+
+        <label className="block text-gray-700">Description</label>
+        <textarea
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          className="w-full p-2 mb-4 border border-gray-300 text-black rounded h-32"
+        />
         <div className="flex justify-end space-x-2">
           <button
             onClick={onClose}

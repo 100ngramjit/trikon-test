@@ -1,6 +1,6 @@
 "use client";
 
-import { addTask, deleteTask, editTask, moveTask } from "@/store/taskSlice";
+import { addTask, moveTask } from "@/store/taskSlice";
 import { useState } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
@@ -29,8 +29,6 @@ export default function Home() {
       status={status}
       tasks={tasks.filter((task) => task.status === status)}
       onTaskMove={moveTaskHandler}
-      onTaskEdit={(task) => dispatch(editTask(task))}
-      onTaskDelete={(id) => dispatch(deleteTask(id))}
       onAddCard={() => {
         setCurrentSection(status);
         setIsModalOpen(true);
@@ -40,7 +38,7 @@ export default function Home() {
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <div className="flex justify-between p-4 bg-gray-200 min-h-screen">
+      <div className="flex justify-between p-4">
         {renderSection("to do")}
         {renderSection("doing")}
         {renderSection("done")}

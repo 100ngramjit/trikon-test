@@ -33,14 +33,14 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
     <>
       <div
         ref={ref}
-        className={`bg-white p-4 rounded-lg shadow-md mb-3 ${
+        className={`bg-white p-4 rounded-lg shadow-xl mb-3 ${
           isDragging ? "opacity-50" : ""
         }`}
       >
         <h3 className="text-lg text-gray-600 font-semibold mb-2">
           {task.name}
         </h3>
-        <p className="text-gray-600 mb-2">{task.description}</p>
+        <p className="text-gray-600 mb-2 line-clamp-3">{task.description}</p>
         <p className="text-sm text-gray-500 mb-3 inline-flex gap-2">
           <span>
             <Clock className="h-5 w-5" />
