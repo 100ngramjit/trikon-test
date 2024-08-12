@@ -1,15 +1,18 @@
 import React, { useState, useRef } from "react";
 import { useDrag } from "react-dnd";
 import { Task } from "@/models/task";
+import EditTaskModal from "./edit-task-modal";
 import { Clock, Pencil, Trash2 } from "lucide-react";
+import { useAppDispatch } from "@/hooks/reduxHooks";
+import { deleteTask } from "@/store/taskSlice";
 
 interface TaskCardProps {
   task: Task;
-  onEdit: (task: Task) => void;
-  onDelete: () => void;
 }
 
-const TaskCard: React.FC<TaskCardProps> = ({ task, onEdit, onDelete }) => {
+const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
+  const dispatch = useAppDispatch();
+
   const [{ isDragging }, drag] = useDrag(() => ({
     type: "TASK",
     item: { id: task.id },
@@ -20,6 +23,11 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, onEdit, onDelete }) => {
 
   const ref = useRef<HTMLDivElement>(null);
   drag(ref);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = () => setIsModalOpen(true);
+  const handleCloseModal = () => setIsModalOpen(false);
 
   return (
     <>
@@ -43,14 +51,17 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, onEdit, onDelete }) => {
           })}
         </p>
         <div className="flex justify-end space-x-2">
-          <button className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-2 rounded text-sm inline-flex gap-2">
+          <button
+            onClick={handleOpenModal}
+            className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-2 rounded text-sm inline-flex gap-2"
+          >
             <span>
               <Pencil className="h-5 w-5" />
             </span>
             Edit
           </button>
           <button
-            onClick={onDelete}
+            onClick={() => dispatch(deleteTask(task.id))}
             className="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded text-sm inline-flex gap-2"
           >
             <span>
@@ -60,6 +71,12 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, onEdit, onDelete }) => {
           </button>
         </div>
       </div>
+
+      <EditTaskModal
+        task={task}
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+      />
     </>
   );
 };

@@ -8,8 +8,6 @@ interface TaskSectionProps {
   status: "to do" | "doing" | "done";
   tasks: Task[];
   onTaskMove: (id: string, newStatus: "to do" | "doing" | "done") => void;
-  onTaskEdit: (task: Task) => void;
-  onTaskDelete: (id: string) => void;
   onAddCard: () => void;
 }
 
@@ -17,8 +15,6 @@ const TaskSection: React.FC<TaskSectionProps> = ({
   status,
   tasks,
   onTaskMove,
-  onTaskEdit,
-  onTaskDelete,
   onAddCard,
 }) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -37,12 +33,7 @@ const TaskSection: React.FC<TaskSectionProps> = ({
       </h2>
       <div>
         {tasks.map((task) => (
-          <TaskCard
-            key={task.id}
-            task={task}
-            onEdit={onTaskEdit}
-            onDelete={() => onTaskDelete(task.id)}
-          />
+          <TaskCard key={task.id} task={task} />
         ))}
       </div>
       <button
