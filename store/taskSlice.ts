@@ -2,7 +2,7 @@ import { Task } from "@/models/task";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface TaskState {
-  tasks: (Omit<Task, "date"> & { date: string })[];
+  tasks: Task[];
 }
 
 const initialState: TaskState = {

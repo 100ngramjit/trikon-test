@@ -1,15 +1,16 @@
+type status = "to do" | "doing" | "done";
 export interface Task {
   id: string;
   name: string;
   description: string;
   date: string;
-  status: "to do" | "doing" | "done";
+  status: status;
 }
 
 export const createTask = (
   name: string,
   description: string,
-  status: "to do" | "doing" | "done"
+  status: status
 ): Task => ({
   id: Math.random().toString(36).substr(2, 9),
   name,
